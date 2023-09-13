@@ -39,7 +39,7 @@ export class compiler {
 
       //checks for variables
       content = oldContent.map((item) => {
-        if (item.startsWith("$")) {
+        if (item.startsWith("$") && item !== "$") {
           if (item === "$temp") {
             return this.temp;
           }
@@ -210,6 +210,10 @@ export class compiler {
           content = content.filter((n) => n !== undefined && n !== "");
           this.runFunction(char, i, content[1], content[2]);
         },
+        exist: () => {
+          content = content.filter((n) => n !== undefined && n !== "");
+          this.runFunction(this.exist, i, content[1]);
+        },
         logClean: logClean,
       };
 
@@ -264,6 +268,14 @@ export class compiler {
         //save it like this (name: line_number): main: 4
         this.sections[words[1]] = i + 1;
       }
+    }
+  }
+  exist = (i, input) => {
+    if(!input) return getErrorMessage(i, "No argument");
+    if(input in this.variables){
+      return 1
+    } else {
+      return 0
     }
   }
 
