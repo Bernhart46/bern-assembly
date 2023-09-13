@@ -1,0 +1,85 @@
+jump main
+section main
+  var input1 4
+  var input2 3
+  var operator gt
+  var jumper_true continue1_true
+  var jumper_false continue1_false
+
+  jump if
+
+  section continue1_true
+    remove jumper_true
+    remove jumper_false
+    log If's result 1: true
+    jump main_continue1
+
+  section continue1_false
+    remove jumper_true
+    remove jumper_false
+    log If's result 1: false
+    jump main_continue1
+ 
+  section main_continue1
+
+  var input1 John Smith
+  var input2 John Smith
+  var operator e
+  var jumper_true continue2_true
+  var jumper_false continue2_false
+
+  jump if
+
+  section continue2_true
+    remove jumper_true
+    remove jumper_false
+    log If's result 2: true
+    jump main_continue2
+
+  section continue2_false
+    remove jumper_true
+    remove jumper_false
+    log If's result 2: false
+    jump main_continue2
+
+
+  section main_continue2
+    log The if Statements have been ended
+
+section if
+  jump_e if_e $operator e
+  jump_e if_gt $operator gt
+  jump_e if_ge $operator ge
+  jump_e if_lt $operator lt
+  jump_e if_le $operator le
+  jump if_wrong_operator
+section if_e
+  jump_e if_true $input1 $input2
+  jump if_false
+section if_gt
+  jump_gt if_true $input1 $input2
+  jump if_false
+section if_ge
+  jump_ge if_true $input1 $input2
+  jump if_false
+section if_lt
+  jump_lt if_true $input1 $input2
+  jump if_false
+section if_le
+  jump_le if_true $input1 $input2
+  jump if_false
+section if_wrong_operator
+  log WRONG OPERATOR
+  jump if_end
+section if_true
+  remove input1
+  remove input2
+  remove operator
+  jump $jumper_true
+section if_false
+  remove input1
+  remove input2
+  remove operator
+  jump $jumper_false
+section if_end
+  jump $jumper_false

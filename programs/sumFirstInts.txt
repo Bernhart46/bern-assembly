@@ -1,0 +1,31 @@
+// Initialize variables
+var sum 0
+var count 0
+var max_count 10
+
+jump main
+
+// Calculate the sum of the first 10 positive integers
+section main
+    // Loop until count <= max_count
+    jump_le check_count $max_count $count
+
+    // Calculate the next integer: next = count + 1
+    add $count 1
+    var next $temp
+
+    // Add the next integer to the sum
+    add $sum $next
+    var sum $temp
+
+    // Increment count by 1
+    add $count 1
+    var count $temp
+
+    // Jump back to the beginning of the loop
+    jump main
+
+section check_count
+    // Print the sum
+    log Sum of the first 10 positive integers:
+    log $sum

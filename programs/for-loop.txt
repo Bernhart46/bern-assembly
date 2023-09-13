@@ -1,0 +1,78 @@
+jump main
+
+section main
+  //prepare for loop
+  var index 0
+  var maxIndex 10
+  var counter 2
+  var operator gt
+  var for_command_block commands
+  var jumper main_continue1
+
+  //loop starter
+  jump for_loop
+
+  //section that the loop needs to run
+  section commands
+    log $index / $maxIndex
+    jump for_loop_start
+
+  //after the loop has ended
+  section main_continue1
+    log Loop Ended
+
+section for_loop
+    jump_e for_loop_error_undefined $index UNDEFINED
+    jump_e for_loop_error_undefined $maxIndex UNDEFINED
+    jump_e for_loop_error_undefined $counter UNDEFINED
+    jump_e for_loop_error_undefined $operator UNDEFINED
+    jump_e for_loop_error_undefined $for_command_block UNDEFINED
+    jump_e for_loop_error_undefined $jumper UNDEFINED
+    jump for_loop_check
+
+section for_loop_start
+    add $index $counter
+    var index $temp
+    jump for_loop_check
+
+section for_loop_check
+  jump_e for_loop_gt $operator gt
+  jump_e for_loop_ge $operator ge
+  jump_e for_loop_lt $operator lt
+  jump_e for_loop_le $operator le
+
+
+  jump for_loop_error_operator
+
+section for_loop_gt
+  jump_le for_loop_error_infinite $counter 0
+  jump_ge for_loop_end $index $maxIndex
+  jump $for_command_block
+section for_loop_ge
+  jump_le for_loop_error_infinite $counter 0
+  jump_gt for_loop_end $index $maxIndex
+  jump $for_command_block
+section for_loop_lt
+  jump_ge for_loop_error_infinite $counter 0
+  jump_le for_loop_end $index $maxIndex
+  jump $for_command_block
+section for_loop_le
+  jump_ge for_loop_error_infinite $counter 0
+  jump_lt for_loop_end $index $maxIndex
+  jump $for_command_block
+section for_loop_error_operator
+  log ERROR: For loop got a WRONG operator!
+  jump for_loop_end
+section for_loop_error_infinite
+  log ERROR: You made an infinite loop
+  jump for_loop_end
+section for_loop_error_undefined
+  log ERROR: Something is UNDEFINED
+
+section for_loop_end
+  remove for_command_block
+  remove operator
+  remove index
+  remove maxIndex
+  remove counter
+  jump $jumper

@@ -1,0 +1,58 @@
+body {
+  margin: 0;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 100vh;
+  background-color: rgb(29, 29, 49);
+  color: rgb(207, 208, 219);
+
+  font-family: "Courier New", Courier, monospace;
+}
+
+.editor {
+  display: inline-flex;
+  gap: 10px;
+  font-family: monospace;
+  line-height: 21px;
+  background: #282a3a;
+  border-radius: 2px;
+}
+
+textarea {
+  font-family: "Courier New", Courier, monospace;
+  line-height: 21px;
+  overflow-y: hidden;
+  padding: 0;
+  border: 0;
+  background: rgb(29, 29, 49);
+  color: rgb(207, 208, 219);
+  width: 100%;
+  outline: solid 1px rgb(207, 208, 219);
+  resize: none;
+}
+
+.line-numbers {
+  width: 20px;
+  text-align: right;
+}
+
+.line-numbers span {
+  counter-increment: linenumber;
+}
+
+.line-numbers span::before {
+  content: counter(linenumber);
+  display: block;
+  color: #506882;
+}
+
+.output {
+  padding: 5px;
+  padding-left: 10px;
+  white-space: pre;
+}
+
+.red {
+  color: red;
+}

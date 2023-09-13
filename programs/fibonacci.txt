@@ -1,0 +1,43 @@
+// Initialize variables
+var n1 0
+var n2 1
+var count 0
+var max_count 10
+
+// Print the first Fibonacci number
+log Fibonacci Sequence ( 0,1... + $max_count ):
+log $n1
+
+// Print the second Fibonacci number
+log $n2
+
+jump main
+
+section main
+    // Loop until count < max_count
+    jump_le check_count $max_count $count
+
+    // Calculate the next Fibonacci number: next = n1 + n2
+    add $n1 $n2
+
+    // Save the next Fibonacci number in the "next" variable
+    var next $temp
+
+    // Print the next Fibonacci number
+    log Count: $count Number: $next
+
+    // Update n1 to be the current n2
+    var n1 $n2
+
+    // Update n2 to be the current next
+    var n2 $next
+
+    // Increment and save count by 1
+    add $count 1
+    var count $temp
+
+    // Jump back to the beginning of the loop
+    jump main
+
+section check_count
+    log Program Ended

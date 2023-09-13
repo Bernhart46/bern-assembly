@@ -1,0 +1,52 @@
+log Input: $argument
+
+//prepare getFirstIndexOfChar
+length $argument
+var length $temp
+var keyChar $space
+var jumper continue1
+
+jump getFirstIndexOfChar
+
+section continue1
+  log Loop ended $loop_result
+  char $argument $loop_result
+  log $temp <--
+
+section getFirstIndexOfChar
+  var isKey 1
+  var index 0
+  var maxIndex $length
+  jump gwuc_loop
+
+section gwuc_loop
+  jump_e loop_done $isKey 2
+  jump_lt gwuc_loop_commands $index $maxIndex
+  jump error
+
+section gwuc_loop_commands
+  char $argument $index
+  var char $temp
+
+  jump_e isKeyTurner $char $keyChar
+
+  jump part2
+section part2
+
+  add $index 1
+  var index $temp
+
+  jump gwuc_loop
+
+section isKeyTurner
+  var isKey 2
+  jump gwuc_loop
+section loop_done
+  var loop_result $index
+  remove index
+  remove isKey
+  remove maxIndex
+  jump $jumper
+
+section error
+  log Character $keyChar haven't founded

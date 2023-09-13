@@ -1,0 +1,23 @@
+//FACTORIAL
+
+var index 1
+var number 20
+
+var num 1
+
+jump main
+
+section main
+  jump_gt end $index $number
+
+  mul $num $index
+  var num $temp
+
+  log $index : $num
+
+  add $index 1
+  var index $temp
+  jump main
+
+section end
+  log end

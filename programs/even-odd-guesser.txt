@@ -1,0 +1,51 @@
+//jump to the for_loop
+jump for_loop
+
+section for_loop
+  //create the variables
+  var index 1
+  var maxIndex 15
+  var increment 1
+
+  //start the loop
+  jump loop_start
+
+section loop_start
+  //if the index is less than maxIndex go to the commands
+  jump_le loop_commands $index $maxIndex
+
+  //if the index is bigger than maxIndex go here
+  //delete the variables and jump to the end
+  remove index
+  remove maxIndex
+  remove increment
+  jump loop_end
+
+//here is where you put your code into the for loop
+section loop_commands
+
+  mod $index 2
+
+  //checks if the result of MOD is 1 or 0
+  jump if
+  section if
+    jump_e if_true $temp 1
+    jump if_false
+  section if_true
+    log The Number $index is an ODD number
+    jump if_end
+  section if_false
+    log The Number $index is an EVEN number
+    jump if_end
+  section if_end
+  
+
+  //add increment value to the index
+  add $index $increment
+  var index $temp
+
+  //go back to the loop's start
+  jump loop_start
+
+section loop_end
+  log end
