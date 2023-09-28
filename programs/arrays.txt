@@ -1,0 +1,46 @@
+var arrayName arr
+var jumper continue1
+var pushableValue new Value
+var arr_0 asd
+
+jump arrayPush
+
+section continue1
+  log PUSHED
+
+
+//ARRAY GET LENGTH
+section getArrayLength
+  var index 0
+  jump getArrayCheckVariable
+  
+section getArrayCheckVariable
+  concat $arrayName _
+  concat $temp $index
+  exist $temp
+  jump_e getArrayEnd $temp 0
+  jump getArrayLengthAddIndex
+
+section getArrayLengthAddIndex
+  add $index 1
+  var index $temp
+  jump getArrayCheckVariable
+
+section getArrayEnd
+  var arrayLength $index
+  remove index
+  jump $jumper
+
+//ARRAY PUSH
+section arrayPush
+  var jumper2 $jumper
+  var jumper arrayPushContinue
+  jump getArrayLength
+section arrayPushContinue
+  concat $arrayName _
+  concat $temp $arrayLength
+  var $temp $pushableValue
+  var jumper $jumper2
+  remove jumper2
+  remove pushableValue
+  jump $jumper

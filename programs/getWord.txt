@@ -1,0 +1,118 @@
+log Argument: $argument
+var input $argument
+var breakChar $space
+var jumper continue
+var starterIndex 0
+
+jump getWord
+
+section continue
+  log Result: $getWordResult
+  log Last index: $getWordResultLastIndex
+  jump getWord
+
+section getWordlog Argument: $argument
+var input $argument
+var breakChar $space
+var jumper continue
+var starterIndex 0
+
+jump getWord
+
+section continue
+  log Result: $getWordResult
+  log Last index: $getWordResultLastIndex
+  var starterIndex $getWordResultLastIndex
+  var jumper continue2
+  jump getWord
+
+section continue2
+  log Result: $getWordResult
+  log Last index: $getWordResultLastIndex
+  var starterIndex $getWordResultLastIndex
+  var jumper continue3
+  jump getWord
+
+section continue3
+  log Result: $getWordResult
+  log Last index: $getWordResultLastIndex
+
+section getWord
+  var index $starterIndex
+  var isFirstCharHappened 0
+  length $input
+  var inputLengthTemp $temp
+  sub $inputLengthTemp $index
+  sub $temp 1
+  var inputLength $temp
+  jump getChar
+
+section getChar
+  jump_e getWordEnd $index $inputLength
+  char $input $index
+  var getWordTemp $temp
+  jump_e getWordEnd $getWordTemp $breakChar
+  jump_e concatFirstChar $isFirstCharHappened 0
+  jump concatChar
+
+section concatFirstChar
+  var getWordResult $getWordTemp
+  var isFirstCharHappened 1
+  jump getWordAddIndex
+
+section concatChar
+  concat $getWordResult $getWordTemp
+  var getWordResult $temp
+  jump getWordAddIndex
+
+section getWordAddIndex
+  add $index 1
+  var index $temp
+  jump getChar
+
+section getWordEnd
+  remove getWordTemp
+  add $index 1
+  var getWordResultLastIndex $temp
+  remove index
+  remove inputLength
+  jump $jumper
+  var index $starterIndex
+  var isFirstCharHappened 0
+  length $input
+  var inputLengthTemp $temp
+  sub $inputLengthTemp $index
+  sub $temp 1
+  var inputLength $temp
+  jump getChar
+
+section getChar
+  jump_e getWordEnd $index $inputLength
+  char $input $index
+  var getWordTemp $temp
+  jump_e getWordEnd $getWordTemp $breakChar
+  jump_e concatFirstChar $isFirstCharHappened 0
+  jump concatChar
+
+section concatFirstChar
+  var getWordResult $getWordTemp
+  var isFirstCharHappened 1
+  jump getWordAddIndex
+
+section concatChar
+  concat $getWordResult $getWordTemp
+  var getWordResult $temp
+  jump getWordAddIndex
+
+section getWordAddIndex
+  add $index 1
+  var index $temp
+  jump getChar
+
+section getWordEnd
+  remove getWordTemp
+  add $index 1
+  var getWordResultLastIndex $temp
+  remove index
+  remove inputLength
+  jump $jumper
