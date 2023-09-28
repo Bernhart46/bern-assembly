@@ -33,3 +33,5 @@ WARNING: There are programs that are unfinished.
 ## Future plans:
 
 I've been planning to make a "C" type language in this assembly-like language, but it takes a little bit of time to think for a proper design of a compiler. (I have zero experience for compilers or anything like that; I just made this project based on my thoughts of how this would work.) And I even need to make universal things like arrays, objects, etc.
+
+## This project is not finished yet. It needs some reworking and optimization.
